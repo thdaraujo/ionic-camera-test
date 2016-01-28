@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $stateParams, $cordovaCamera, $ionicPlatform) {
+.controller('DashCtrl', function($scope, $stateParams, $cordovaCamera, $ionicPlatform, $http) {
 
   $ionicPlatform.ready(function() {
 
@@ -23,8 +23,17 @@ angular.module('starter.controllers', [])
             // An error occured. Show a message to the user
         });
     }
-
   });
+
+  $scope.callAPI = function() {
+    var url = 'http://rawb.bakirci.nl/api/WalkingDead/getEpisodes?callback=JSON_CALLBACK';
+    console.log(url);
+
+    $http.jsonp(url)
+    .success(function(data){
+        console.log(data);
+    });
+  }
 
 })
 
